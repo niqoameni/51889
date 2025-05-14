@@ -1,7 +1,7 @@
-import SimpleLangVisitor from './generated/SimpleLangVisitor.js';
-import SimpleLangParser from './generated/SimpleLangParser.js';
+import RegexVisitor from './generated/RegexVisitor.js';
+import RegexParser from './generated/RegexParser.js';
 
-class CustomSimpleLangVisitor extends SimpleLangVisitor {
+class CustomRegexVisitor extends RegexVisitor {
     constructor() {
         super();
         this.memory = {}; // Almacén de variables
@@ -32,14 +32,14 @@ class CustomSimpleLangVisitor extends SimpleLangVisitor {
     visitMulDiv(ctx) {
         const left = this.visit(ctx.expr(0));
         const right = this.visit(ctx.expr(1));
-        return ctx.op.type === SimpleLangParser.MUL ? left * right : left / right;
+        return ctx.op.type === RegexParser.MUL ? left * right : left / right;
     }
 
     visitAddSub(ctx) {
         const left = this.visit(ctx.expr(0));
         const right = this.visit(ctx.expr(1));
-        return ctx.op.type === SimpleLangParser.ADD ? left + right : left - right;
+        return ctx.op.type === RegexParser.ADD ? left + right : left - right;
     }
 }
 
-export default CustomSimpleLangVisitor;
+export default CustomRegexVisitor;

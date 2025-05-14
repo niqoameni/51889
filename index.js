@@ -1,6 +1,6 @@
-import SimpleLangLexer from "./generated/RegexLexer.js";
-import SimpleLangParser from "./generated/RegexLexer.js";
-import CustomSimpleLangVisitor from "./CustomRegexVisitor.js";
+import RegexLexer from "./generated/RegexLexer.js";
+import RegexParser from "./generated/RegexLexer.js";
+import CustomRegexVisitor from "./CustomRegexVisitor.js";
 import antlr4, { CharStreams, CommonTokenStream } from "antlr4";
 import readline from 'readline';
 import fs from 'fs';
@@ -19,7 +19,7 @@ async function main() {
     
     // Proceso la entrada con el analizador para obtener el lexer
     let inputStream = CharStreams.fromString(input);
-    let lexer = new SimpleLangLexer(inputStream);
+    let lexer = new RegexLexer(inputStream);
     
     //Verificar si el lexer está generando tokens 
     console.log("Verificando tokens generados por el lexer...");
@@ -38,7 +38,7 @@ async function main() {
     // Recorrer todos los tokens generados por el lexer
     for (let token of tokens) {
         // Obtener el nombre simbólico del token
-        const tokenType = SimpleLangLexer.symbolicNames[token.type] || `UNKNOWN (${token.type})`;
+        const tokenType = RegexLexer.symbolicNames[token.type] || `UNKNOWN (${token.type})`;
         const lexema = token.text; // Obtener el lexema (texto del token)
         console.log(`| ${lexema.padEnd(14)} | ${tokenType.padEnd(30)}|`);
     }
@@ -47,14 +47,12 @@ async function main() {
     /* Vuelve a procesar la entrada, obtener el lexer, el código tokenizado y el parser 
      * Es necesario volver a procesar la entrada porque la función getAllTokens() consume
      * todos los tokens reconocidos y vacía el lexer. */
-   
-   // COMENTARIO PA PROBAR -------------------------------------------------------------------------------------------------------------------------
 
     inputStream = CharStreams.fromString(input);
-    lexer = new SimpleLangLexer(inputStream);
+    lexer = new RegexLexer(inputStream);
     let tokenStream = new CommonTokenStream(lexer);
-    let parser = new SimpleLangParser(tokenStream);
-    let tree = parser.prog();
+    let parser = new RegexParser(tokenStream);
+    let tree = parser.regex();
 
     // Verificar si se produjeron errores sintácticos
     if (parser.syntaxErrorsCount > 0) {
@@ -66,8 +64,8 @@ async function main() {
 
         /* Utilizar un visitor para visitar los nodos que me interesan del árbol 
          * e implementar la semántica que nos interesa.*/
-      // COMENTARIO PA PROBAR- ------------------------------------------------------------------------------------------------------------------------------------
-        const visitor = new CustomSimpleLangVisitor();
+
+        const visitor = new CustomRegexVisitor();
         visitor.visit(tree);
     }
 }

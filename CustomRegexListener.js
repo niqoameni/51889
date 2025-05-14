@@ -1,6 +1,6 @@
-import CalculatorListener from "./generated/CalculatorListener.js";
+import RegexListener from "./generated/RegexListener.js";
 
-export class CustomCalculatorListener extends CalculatorListener {
+export class CustomRegexListener extends RegexListener {
 
     enterStat(ctx) {
         console.log(`Se detectó una: ${ctx.constructor.name}`);
