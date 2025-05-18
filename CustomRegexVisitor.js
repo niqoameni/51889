@@ -7,38 +7,61 @@ class CustomRegexVisitor extends RegexVisitor {
         this.memory = {}; // Almacén de variables
     }
 
-    visitDecl(ctx) {
-        const varName = ctx.ID().getText();
-        if (ctx.expr()) {
-            this.memory[varName] = this.visit(ctx.expr());
-        }
-        console.log(`Declaración: ${ctx.getChild(0).getText()} ${varName} = ${this.memory[varName] || 'undefined'};`);
+    visitRegex(ctx) {
+        const term = this.visit(ctx.term());
+        const alt = ctx.regex() ? this.visit(ctx.regex()) : '';
+        return alt ? `${term}|${alt}` : term;
     }
 
-    visitAssign(ctx) {
-        const varName = ctx.ID().getText();
-        this.memory[varName] = this.visit(ctx.expr());
-        console.log(`${varName} = ${this.memory[varName]};`);
+    visitTerm(ctx) {
+        return ctx.factor().map(f => this.visit(f)).join('');
+    }
+
+    visitFactor(ctx) {
+        const base = this.visit(ctx.base());
+        const quant = ctx.quantifier() ? this.visit(ctx.quantifier()) : '';
+        return base + quant;
+    }
+
+    visitBase(ctx) {
+        if (ctx.character()) {
+            return this.visit(ctx.character());
+        } else if (ctx.group()) {
+            return this.visit(ctx.group());
+        } else if (ctx.clase()) {
+            return this.visit(ctx.clase());
+        }
+        return '';
+    }
+
+    visitGroup(ctx) {
+        const content = this.visit(ctx.regex());
+        return `(${content})`;
+    }
+
+    visitClase(ctx) {
+        const negated = ctx.CARET() ? '^' : '';
+        const elements = ctx.children
+            .slice(1, -1) // eliminar corchetes
+            .map(child => child.getText()) // tomar texto literal
+            .join('');
+        return `[${negated}${elements}]`;
+    }
+
+    visitRange(ctx) {
+        return `${this.visit(ctx.character(0))}-${this.visit(ctx.character(1))}`;
+    }
+
+    visitQuantifier(ctx) {
+        return ctx.getText(); // devuelve '*', '+', '?', '{n}', etc.
+    }
+
+    visitCharacter(ctx) {
+        return ctx.CARACTER().getText(); // solo un carácter simple
     }
 
     visitNumber(ctx) {
-        return Number(ctx.getText());
-    }
-
-    visitId(ctx) {
-        return this.memory[ctx.getText()] || 0;
-    }
-
-    visitMulDiv(ctx) {
-        const left = this.visit(ctx.expr(0));
-        const right = this.visit(ctx.expr(1));
-        return ctx.op.type === RegexParser.MUL ? left * right : left / right;
-    }
-
-    visitAddSub(ctx) {
-        const left = this.visit(ctx.expr(0));
-        const right = this.visit(ctx.expr(1));
-        return ctx.op.type === RegexParser.ADD ? left + right : left - right;
+        return ctx.INT().getText();
     }
 }
 

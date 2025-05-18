@@ -50,12 +50,12 @@ export default class RegexListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by RegexParser#class.
-	enterClass(ctx) {
+	// Enter a parse tree produced by RegexParser#clase.
+	enterClase(ctx) {
 	}
 
-	// Exit a parse tree produced by RegexParser#class.
-	exitClass(ctx) {
+	// Exit a parse tree produced by RegexParser#clase.
+	exitClase(ctx) {
 	}
 
 
@@ -77,12 +77,12 @@ export default class RegexListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by RegexParser#char.
-	enterChar(ctx) {
+	// Enter a parse tree produced by RegexParser#character.
+	enterCharacter(ctx) {
 	}
 
-	// Exit a parse tree produced by RegexParser#char.
-	exitChar(ctx) {
+	// Exit a parse tree produced by RegexParser#character.
+	exitCharacter(ctx) {
 	}
 
 

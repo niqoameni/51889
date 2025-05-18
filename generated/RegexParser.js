@@ -4,28 +4,30 @@ import antlr4 from 'antlr4';
 import RegexListener from './RegexListener.js';
 import RegexVisitor from './RegexVisitor.js';
 
-const serializedATN = [4,1,16,79,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,16,85,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,1,0,1,0,1,0,3,0,24,8,0,1,1,4,1,27,
 8,1,11,1,12,1,28,1,2,1,2,3,2,33,8,2,1,3,1,3,1,3,3,3,38,8,3,1,4,1,4,1,4,1,
 4,1,5,1,5,3,5,46,8,5,1,5,1,5,4,5,50,8,5,11,5,12,5,51,1,5,1,5,1,6,1,6,1,6,
-1,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,67,8,7,3,7,69,8,7,1,7,1,7,3,7,73,8,7,
-1,8,1,8,1,9,1,9,1,9,0,0,10,0,2,4,6,8,10,12,14,16,18,0,0,81,0,20,1,0,0,0,
-2,26,1,0,0,0,4,30,1,0,0,0,6,37,1,0,0,0,8,39,1,0,0,0,10,43,1,0,0,0,12,55,
-1,0,0,0,14,72,1,0,0,0,16,74,1,0,0,0,18,76,1,0,0,0,20,23,3,2,1,0,21,22,5,
-7,0,0,22,24,3,0,0,0,23,21,1,0,0,0,23,24,1,0,0,0,24,1,1,0,0,0,25,27,3,4,2,
-0,26,25,1,0,0,0,27,28,1,0,0,0,28,26,1,0,0,0,28,29,1,0,0,0,29,3,1,0,0,0,30,
-32,3,6,3,0,31,33,3,14,7,0,32,31,1,0,0,0,32,33,1,0,0,0,33,5,1,0,0,0,34,38,
-3,16,8,0,35,38,3,8,4,0,36,38,3,10,5,0,37,34,1,0,0,0,37,35,1,0,0,0,37,36,
-1,0,0,0,38,7,1,0,0,0,39,40,5,1,0,0,40,41,3,0,0,0,41,42,5,2,0,0,42,9,1,0,
-0,0,43,45,5,3,0,0,44,46,5,13,0,0,45,44,1,0,0,0,45,46,1,0,0,0,46,49,1,0,0,
-0,47,50,3,12,6,0,48,50,3,16,8,0,49,47,1,0,0,0,49,48,1,0,0,0,50,51,1,0,0,
-0,51,49,1,0,0,0,51,52,1,0,0,0,52,53,1,0,0,0,53,54,5,4,0,0,54,11,1,0,0,0,
-55,56,3,16,8,0,56,57,5,10,0,0,57,58,3,16,8,0,58,13,1,0,0,0,59,73,5,11,0,
-0,60,73,5,9,0,0,61,73,5,8,0,0,62,63,5,5,0,0,63,68,3,18,9,0,64,66,5,12,0,
-0,65,67,3,18,9,0,66,65,1,0,0,0,66,67,1,0,0,0,67,69,1,0,0,0,68,64,1,0,0,0,
-68,69,1,0,0,0,69,70,1,0,0,0,70,71,5,6,0,0,71,73,1,0,0,0,72,59,1,0,0,0,72,
-60,1,0,0,0,72,61,1,0,0,0,72,62,1,0,0,0,73,15,1,0,0,0,74,75,5,14,0,0,75,17,
-1,0,0,0,76,77,5,15,0,0,77,19,1,0,0,0,10,23,28,32,37,45,49,51,66,68,72];
+1,6,1,6,1,6,1,6,1,6,3,6,64,8,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,73,8,7,3,
+7,75,8,7,1,7,1,7,3,7,79,8,7,1,8,1,8,1,9,1,9,1,9,0,0,10,0,2,4,6,8,10,12,14,
+16,18,0,0,88,0,20,1,0,0,0,2,26,1,0,0,0,4,30,1,0,0,0,6,37,1,0,0,0,8,39,1,
+0,0,0,10,43,1,0,0,0,12,63,1,0,0,0,14,78,1,0,0,0,16,80,1,0,0,0,18,82,1,0,
+0,0,20,23,3,2,1,0,21,22,5,7,0,0,22,24,3,0,0,0,23,21,1,0,0,0,23,24,1,0,0,
+0,24,1,1,0,0,0,25,27,3,4,2,0,26,25,1,0,0,0,27,28,1,0,0,0,28,26,1,0,0,0,28,
+29,1,0,0,0,29,3,1,0,0,0,30,32,3,6,3,0,31,33,3,14,7,0,32,31,1,0,0,0,32,33,
+1,0,0,0,33,5,1,0,0,0,34,38,3,16,8,0,35,38,3,8,4,0,36,38,3,10,5,0,37,34,1,
+0,0,0,37,35,1,0,0,0,37,36,1,0,0,0,38,7,1,0,0,0,39,40,5,1,0,0,40,41,3,0,0,
+0,41,42,5,2,0,0,42,9,1,0,0,0,43,45,5,3,0,0,44,46,5,13,0,0,45,44,1,0,0,0,
+45,46,1,0,0,0,46,49,1,0,0,0,47,50,3,12,6,0,48,50,3,16,8,0,49,47,1,0,0,0,
+49,48,1,0,0,0,50,51,1,0,0,0,51,49,1,0,0,0,51,52,1,0,0,0,52,53,1,0,0,0,53,
+54,5,4,0,0,54,11,1,0,0,0,55,56,3,16,8,0,56,57,5,10,0,0,57,58,3,16,8,0,58,
+64,1,0,0,0,59,60,3,18,9,0,60,61,5,10,0,0,61,62,3,18,9,0,62,64,1,0,0,0,63,
+55,1,0,0,0,63,59,1,0,0,0,64,13,1,0,0,0,65,79,5,11,0,0,66,79,5,9,0,0,67,79,
+5,8,0,0,68,69,5,5,0,0,69,74,3,18,9,0,70,72,5,12,0,0,71,73,3,18,9,0,72,71,
+1,0,0,0,72,73,1,0,0,0,73,75,1,0,0,0,74,70,1,0,0,0,74,75,1,0,0,0,75,76,1,
+0,0,0,76,77,5,6,0,0,77,79,1,0,0,0,78,65,1,0,0,0,78,66,1,0,0,0,78,67,1,0,
+0,0,78,68,1,0,0,0,79,15,1,0,0,0,80,81,5,15,0,0,81,17,1,0,0,0,82,83,5,14,
+0,0,83,19,1,0,0,0,11,23,28,32,37,45,49,51,63,72,74,78];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -41,10 +43,10 @@ export default class RegexParser extends antlr4.Parser {
                             "'|'", "'?'", "'+'", "'-'", "'*'", "','", "'^'" ];
     static symbolicNames = [ null, "LPARENS", "RPARENS", "LBRACK", "RBRACK", 
                              "LBRACE", "RBRACE", "OR", "QMARK", "SUM", "SUB", 
-                             "MUL", "COMA", "CARET", "CARACTER", "INT", 
+                             "MUL", "COMA", "CARET", "INT", "CARACTER", 
                              "WS" ];
-    static ruleNames = [ "regex", "term", "factor", "base", "group", "class", 
-                         "range", "quantifier", "char", "number" ];
+    static ruleNames = [ "regex", "term", "factor", "base", "group", "clase", 
+                         "range", "quantifier", "character", "number" ];
 
     constructor(input) {
         super(input);
@@ -105,7 +107,7 @@ export default class RegexParser extends antlr4.Parser {
 	            this.state = 28; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 16394) !== 0));
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 32778) !== 0));
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -161,10 +163,10 @@ export default class RegexParser extends antlr4.Parser {
 	        this.state = 37;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 14:
+	        case 15:
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 34;
-	            this.char_();
+	            this.character();
 	            break;
 	        case 1:
 	            this.enterOuterAlt(localctx, 2);
@@ -174,7 +176,7 @@ export default class RegexParser extends antlr4.Parser {
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
 	            this.state = 36;
-	            this.class_();
+	            this.clase();
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
@@ -222,9 +224,9 @@ export default class RegexParser extends antlr4.Parser {
 
 
 
-	class_() {
-	    let localctx = new ClassContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, RegexParser.RULE_class);
+	clase() {
+	    let localctx = new ClaseContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 10, RegexParser.RULE_clase);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
@@ -253,14 +255,14 @@ export default class RegexParser extends antlr4.Parser {
 
 	            case 2:
 	                this.state = 48;
-	                this.char_();
+	                this.character();
 	                break;
 
 	            }
 	            this.state = 51; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while(_la===14);
+	        } while(_la===14 || _la===15);
 	        this.state = 53;
 	        this.match(RegexParser.RBRACK);
 	    } catch (re) {
@@ -283,13 +285,30 @@ export default class RegexParser extends antlr4.Parser {
 	    let localctx = new RangeContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 12, RegexParser.RULE_range);
 	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 55;
-	        this.char_();
-	        this.state = 56;
-	        this.match(RegexParser.SUB);
-	        this.state = 57;
-	        this.char_();
+	        this.state = 63;
+	        this._errHandler.sync(this);
+	        switch(this._input.LA(1)) {
+	        case 15:
+	            this.enterOuterAlt(localctx, 1);
+	            this.state = 55;
+	            this.character();
+	            this.state = 56;
+	            this.match(RegexParser.SUB);
+	            this.state = 57;
+	            this.character();
+	            break;
+	        case 14:
+	            this.enterOuterAlt(localctx, 2);
+	            this.state = 59;
+	            this.number();
+	            this.state = 60;
+	            this.match(RegexParser.SUB);
+	            this.state = 61;
+	            this.number();
+	            break;
+	        default:
+	            throw new antlr4.error.NoViableAltException(this);
+	        }
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -311,47 +330,47 @@ export default class RegexParser extends antlr4.Parser {
 	    this.enterRule(localctx, 14, RegexParser.RULE_quantifier);
 	    var _la = 0;
 	    try {
-	        this.state = 72;
+	        this.state = 78;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 11:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 59;
+	            this.state = 65;
 	            this.match(RegexParser.MUL);
 	            break;
 	        case 9:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 60;
+	            this.state = 66;
 	            this.match(RegexParser.SUM);
 	            break;
 	        case 8:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 61;
+	            this.state = 67;
 	            this.match(RegexParser.QMARK);
 	            break;
 	        case 5:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 62;
-	            this.match(RegexParser.LBRACE);
-	            this.state = 63;
-	            this.number();
 	            this.state = 68;
+	            this.match(RegexParser.LBRACE);
+	            this.state = 69;
+	            this.number();
+	            this.state = 74;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            if(_la===12) {
-	                this.state = 64;
+	                this.state = 70;
 	                this.match(RegexParser.COMA);
-	                this.state = 66;
+	                this.state = 72;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
-	                if(_la===15) {
-	                    this.state = 65;
+	                if(_la===14) {
+	                    this.state = 71;
 	                    this.number();
 	                }
 
 	            }
 
-	            this.state = 70;
+	            this.state = 76;
 	            this.match(RegexParser.RBRACE);
 	            break;
 	        default:
@@ -373,12 +392,12 @@ export default class RegexParser extends antlr4.Parser {
 
 
 
-	char_() {
-	    let localctx = new CharContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, RegexParser.RULE_char);
+	character() {
+	    let localctx = new CharacterContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 16, RegexParser.RULE_character);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 74;
+	        this.state = 80;
 	        this.match(RegexParser.CARACTER);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -401,7 +420,7 @@ export default class RegexParser extends antlr4.Parser {
 	    this.enterRule(localctx, 18, RegexParser.RULE_number);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 76;
+	        this.state = 82;
 	        this.match(RegexParser.INT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -434,8 +453,8 @@ RegexParser.SUB = 10;
 RegexParser.MUL = 11;
 RegexParser.COMA = 12;
 RegexParser.CARET = 13;
-RegexParser.CARACTER = 14;
-RegexParser.INT = 15;
+RegexParser.INT = 14;
+RegexParser.CARACTER = 15;
 RegexParser.WS = 16;
 
 RegexParser.RULE_regex = 0;
@@ -443,10 +462,10 @@ RegexParser.RULE_term = 1;
 RegexParser.RULE_factor = 2;
 RegexParser.RULE_base = 3;
 RegexParser.RULE_group = 4;
-RegexParser.RULE_class = 5;
+RegexParser.RULE_clase = 5;
 RegexParser.RULE_range = 6;
 RegexParser.RULE_quantifier = 7;
-RegexParser.RULE_char = 8;
+RegexParser.RULE_character = 8;
 RegexParser.RULE_number = 9;
 
 class RegexContext extends antlr4.ParserRuleContext {
@@ -611,16 +630,16 @@ class BaseContext extends antlr4.ParserRuleContext {
         this.ruleIndex = RegexParser.RULE_base;
     }
 
-	char_() {
-	    return this.getTypedRuleContext(CharContext,0);
+	character() {
+	    return this.getTypedRuleContext(CharacterContext,0);
 	};
 
 	group() {
 	    return this.getTypedRuleContext(GroupContext,0);
 	};
 
-	class_() {
-	    return this.getTypedRuleContext(ClassContext,0);
+	clase() {
+	    return this.getTypedRuleContext(ClaseContext,0);
 	};
 
 	enterRule(listener) {
@@ -699,7 +718,7 @@ class GroupContext extends antlr4.ParserRuleContext {
 
 
 
-class ClassContext extends antlr4.ParserRuleContext {
+class ClaseContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -710,7 +729,7 @@ class ClassContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = RegexParser.RULE_class;
+        this.ruleIndex = RegexParser.RULE_clase;
     }
 
 	LBRACK() {
@@ -736,32 +755,32 @@ class ClassContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	char_ = function(i) {
+	character = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(CharContext);
+	        return this.getTypedRuleContexts(CharacterContext);
 	    } else {
-	        return this.getTypedRuleContext(CharContext,i);
+	        return this.getTypedRuleContext(CharacterContext,i);
 	    }
 	};
 
 	enterRule(listener) {
 	    if(listener instanceof RegexListener ) {
-	        listener.enterClass(this);
+	        listener.enterClase(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof RegexListener ) {
-	        listener.exitClass(this);
+	        listener.exitClase(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof RegexVisitor ) {
-	        return visitor.visitClass(this);
+	        return visitor.visitClase(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -786,19 +805,30 @@ class RangeContext extends antlr4.ParserRuleContext {
         this.ruleIndex = RegexParser.RULE_range;
     }
 
-	char_ = function(i) {
+	character = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(CharContext);
+	        return this.getTypedRuleContexts(CharacterContext);
 	    } else {
-	        return this.getTypedRuleContext(CharContext,i);
+	        return this.getTypedRuleContext(CharacterContext,i);
 	    }
 	};
 
 	SUB() {
 	    return this.getToken(RegexParser.SUB, 0);
+	};
+
+	number = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(NumberContext);
+	    } else {
+	        return this.getTypedRuleContext(NumberContext,i);
+	    }
 	};
 
 	enterRule(listener) {
@@ -900,7 +930,7 @@ class QuantifierContext extends antlr4.ParserRuleContext {
 
 
 
-class CharContext extends antlr4.ParserRuleContext {
+class CharacterContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -911,7 +941,7 @@ class CharContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = RegexParser.RULE_char;
+        this.ruleIndex = RegexParser.RULE_character;
     }
 
 	CARACTER() {
@@ -920,19 +950,19 @@ class CharContext extends antlr4.ParserRuleContext {
 
 	enterRule(listener) {
 	    if(listener instanceof RegexListener ) {
-	        listener.enterChar(this);
+	        listener.enterCharacter(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof RegexListener ) {
-	        listener.exitChar(this);
+	        listener.exitCharacter(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof RegexVisitor ) {
-	        return visitor.visitChar(this);
+	        return visitor.visitCharacter(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -992,8 +1022,8 @@ RegexParser.TermContext = TermContext;
 RegexParser.FactorContext = FactorContext; 
 RegexParser.BaseContext = BaseContext; 
 RegexParser.GroupContext = GroupContext; 
-RegexParser.ClassContext = ClassContext; 
+RegexParser.ClaseContext = ClaseContext; 
 RegexParser.RangeContext = RangeContext; 
 RegexParser.QuantifierContext = QuantifierContext; 
-RegexParser.CharContext = CharContext; 
+RegexParser.CharacterContext = CharacterContext; 
 RegexParser.NumberContext = NumberContext; 

@@ -3,23 +3,24 @@ grammar Regex;
 regex: term ('|' regex)?;
 term: (factor)+;
 factor: base (quantifier)?;
-base: char
+base: character
     | group
-    | class
+    | clase
     ;
 group: '(' regex ')';
-class: '[' '^'? (range | char)+ ']';
-range: char '-' char;
+clase: '[' ('^')? (range | character)+ ']';
+range: character '-' character
+     | number '-' number;
 quantifier:   '*'
             | '+'
             | '?'
             | '{' number (',' (number)? )? '}'
             ;
-char: CARACTER;
+character: CARACTER;
 number: INT;
 
 
-//Token
+//Tokens
 
 LPARENS: '(';
 RPARENS: ')';
@@ -34,6 +35,6 @@ SUB: '-';
 MUL: '*';
 COMA: ',';
 CARET: '^'; 
-CARACTER: [a-zA-Z0-9];
 INT: [0-9][0-9]*;
+CARACTER: [a-zA-Z0-9];
 WS: [ \t\n\r]+ -> skip;

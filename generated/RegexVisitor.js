@@ -36,8 +36,8 @@ export default class RegexVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by RegexParser#class.
-	visitClass(ctx) {
+	// Visit a parse tree produced by RegexParser#clase.
+	visitClase(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
@@ -54,8 +54,8 @@ export default class RegexVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by RegexParser#char.
-	visitChar(ctx) {
+	// Visit a parse tree produced by RegexParser#character.
+	visitCharacter(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

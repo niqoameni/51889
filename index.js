@@ -1,5 +1,5 @@
 import RegexLexer from "./generated/RegexLexer.js";
-import RegexParser from "./generated/RegexLexer.js";
+import RegexParser from "./generated/RegexParser.js";
 import CustomRegexVisitor from "./CustomRegexVisitor.js";
 import antlr4, { CharStreams, CommonTokenStream } from "antlr4";
 import readline from 'readline';
@@ -8,65 +8,85 @@ import fs from 'fs';
 async function main() {
     let input;
 
-    // Intento leer la entrada desde el archivo input - en forma sincrónica.
+    // Intento leer la entrada desde el archivo input en forma sincrónica.
     try {
         input = fs.readFileSync('input.txt', 'utf8');
+        if(input.trim() === ''){
+            throw new Error('El archivo está vacio') //Fuerza un error cuando el archivo "input.txt" está vacio
+        }
     } catch (err) {
         // Si no es posible leer el archivo, solicitar la entrada del usuario por teclado
-        input = await leerCadena(); // Simula lectura síncrona
+        input = await leerCadena(); // Simula lectura sincróna
         console.log(input);
     }
-    
+
     // Proceso la entrada con el analizador para obtener el lexer
     let inputStream = CharStreams.fromString(input);
     let lexer = new RegexLexer(inputStream);
-    
-    //Verificar si el lexer está generando tokens 
-    console.log("Verificando tokens generados por el lexer...");
+
+    // Guardar errores léxicos
+    const lexerErrors = [];
+    lexer.removeErrorListeners();
+    lexer.addErrorListener({
+        syntaxError(recognizer, offendingSymbol, line, column, msg) {
+            lexerErrors.push(`Error léxico en línea ${line}: ${msg}`);
+        }
+    });
+
+    // Obtener tokens (esto vacía el lexer, así que después hay que regenerarlo)
     const tokens = lexer.getAllTokens();
-    if (tokens.length === 0) {
-        console.error("No se generaron tokens. Verifica la entrada y la gramática.");
+
+    if (lexerErrors.length > 0) {
+        console.error("Errores léxicos encontrados:");
+        console.error(lexerErrors.join("\n"));
         return;
     }
 
-    //Mostrar la tabla de tokens y lexemas
+    // Mostrar la tabla de tokens y lexemas
     console.log("\nTabla de Tokens y Lexemas:");
     console.log("--------------------------------------------------");
     console.log("| Lexema         | Token                         |");
     console.log("--------------------------------------------------");
 
-    // Recorrer todos los tokens generados por el lexer
     for (let token of tokens) {
-        // Obtener el nombre simbólico del token
         const tokenType = RegexLexer.symbolicNames[token.type] || `UNKNOWN (${token.type})`;
-        const lexema = token.text; // Obtener el lexema (texto del token)
+        const lexema = token.text;
         console.log(`| ${lexema.padEnd(14)} | ${tokenType.padEnd(30)}|`);
     }
-    console.log("--------------------------------------------------"); 
+    console.log("--------------------------------------------------");
 
-    /* Vuelve a procesar la entrada, obtener el lexer, el código tokenizado y el parser 
-     * Es necesario volver a procesar la entrada porque la función getAllTokens() consume
-     * todos los tokens reconocidos y vacía el lexer. */
-
+    // Vuelve a procesar la entrada para crear el parser
     inputStream = CharStreams.fromString(input);
     lexer = new RegexLexer(inputStream);
-    let tokenStream = new CommonTokenStream(lexer);
-    let parser = new RegexParser(tokenStream);
-    let tree = parser.regex();
+    const tokenStream = new CommonTokenStream(lexer);
+    const parser = new RegexParser(tokenStream);
 
-    // Verificar si se produjeron errores sintácticos
-    if (parser.syntaxErrorsCount > 0) {
-        console.error("\nSe encontraron errores de sintaxis en la entrada.");
+    // Guardar errores sintácticos
+    const parserErrors = [];
+    parser.removeErrorListeners();
+    parser.addErrorListener({
+        syntaxError(recognizer, offendingSymbol, line, column, msg) {
+            parserErrors.push(`Error sintáctico en línea ${line}: ${msg}`);
+        }
+    });
+
+    const tree = parser.regex();
+
+    if (parserErrors.length > 0) {
+        console.error("\nErrores sintácticos encontrados:");
+        console.error(parserErrors.join("\n"));
+        return;
     } else {
         console.log("\nEntrada válida.");
         const cadena_tree = tree.toStringTree(parser.ruleNames);
         console.log(`Árbol de derivación: ${cadena_tree}`);
-
-        /* Utilizar un visitor para visitar los nodos que me interesan del árbol 
-         * e implementar la semántica que nos interesa.*/
-
+        
         const visitor = new CustomRegexVisitor();
         visitor.visit(tree);
+        
+        // Interpretacion o traduccion a js
+        const regexJS = visitor.visit(tree);
+        console.log(`\nTraducción JavaScript:\nconst regex = /${regexJS}/;`);
     }
 }
 
@@ -84,6 +104,4 @@ function leerCadena() {
     });
 }
 
-// Ejecuta la función principal
 main();
-
