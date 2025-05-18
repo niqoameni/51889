@@ -18,5 +18,7 @@
     ![image](https://github.com/user-attachments/assets/a589e239-815c-473d-a358-820e9770d3a4)
 
 6. El analizador le pedirá ingresar la cadena a evaluar. Copie y pegue alguno de los "inputs" dados en los archivos "input_correcto1.txt", "input_correcto2.txt", "input_incorrecto1.txt" e "input_incorrecto2.txt" y presione ENTER.
+   
+    ![image](https://github.com/user-attachments/assets/3a02b088-6e7f-4a15-9b2b-d7c5f9818040)
 
-    ![image](https://github.com/user-attachments/assets/35c6ef17-e1a2-4988-90d4-d02665fb8a3e)
+
